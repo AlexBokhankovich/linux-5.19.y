@@ -141,6 +141,9 @@ static void stmmac_init_fs(struct net_device *dev);
 static void stmmac_exit_fs(struct net_device *dev);
 #endif
 
+#define JL2XX1_PHY_ID	0x937c4030
+#define JL2101_PHY_ID	0x937c4032
+
 #define STMMAC_COAL_TIMER(x) (ns_to_ktime((x) * NSEC_PER_USEC))
 
 int stmmac_bus_clks_config(struct stmmac_priv *priv, bool enabled)
@@ -2841,6 +2844,9 @@ static int stmmac_init_dma_engine(struct stmmac_priv *priv)
 
 	if (priv->extend_desc && (priv->mode == STMMAC_RING_MODE))
 		atds = 1;
+
+	if (priv->phydev->phy_id == JL2XX1_PHY_ID || priv->phydev->phy_id == JL2101_PHY_ID)
+		msleep(1500);
 
 	ret = stmmac_reset(priv, priv->ioaddr);
 	if (ret) {
