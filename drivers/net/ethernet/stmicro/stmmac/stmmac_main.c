@@ -2845,7 +2845,7 @@ static int stmmac_init_dma_engine(struct stmmac_priv *priv)
 	if (priv->extend_desc && (priv->mode == STMMAC_RING_MODE))
 		atds = 1;
 
-	if (priv->phydev->phy_id == JL2XX1_PHY_ID || priv->phydev->phy_id == JL2101_PHY_ID)
+	if (priv->dev->phydev->phy_id == JL2XX1_PHY_ID || priv->dev->phydev->phy_id  == JL2101_PHY_ID)
 		msleep(1500);
 
 	ret = stmmac_reset(priv, priv->ioaddr);
